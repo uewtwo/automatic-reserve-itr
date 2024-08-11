@@ -1,0 +1,8 @@
+name: diff-lock
+description: check the diff between bun.lockb and yarn.lock
+runs:
+  using: 'composite'
+  steps:
+    - name: check diff-lock
+      shell: bash
+      run: diff <(bun bun.lockb) yarn.lock

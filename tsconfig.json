@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    // Enable latest features
+    "lib": ["ES2023.Array", "dom"],
+    "target": "ES2022",
+    "module": "commonjs",
+
+    // Bundler mode
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+
+    // Best practices
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false,
+
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "baseUrl": "src",
+    "outDir": "dist",
+    "rootDir": "./",
+    "paths": {
+      "@automatic-reservation-itr/*": ["*"],
+    },
+    "skipDefaultLibCheck": true,
+  },
+  "include": ["./src/*.ts", "./src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "ss/"],
+}

@@ -1,0 +1,25 @@
+{
+  "cSpell.words": [
+    "alfaro",
+    "availables",
+    "clearfix",
+    "isshin",
+    "kotoritei",
+    "oukarou",
+    "recaptcha",
+    "Recaptchas",
+  ],
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.quickfix": "explicit",
+    "source.fixAll.biome": "explicit",
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome",
+  },
+}
