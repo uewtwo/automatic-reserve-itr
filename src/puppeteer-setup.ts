@@ -13,5 +13,3 @@ puppeteer.use(
     visualFeedback: true,
   }),
 );
-
-console.log('puppeteer-setup.ts, email', process.env.EMAIL);

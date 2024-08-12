@@ -8,7 +8,7 @@ import appRootPath from 'app-root-path';
 (async () => {
   console.log('start');
   const args = process.argv.slice(2); // Get command line arguments
-  const debug = args[1] === 'debug';
+  const debug = process.env.MODE === 'debug';
   // Remove files in ss directory
   // if (debug) {
   //   for (const file of fs.readdirSync(`${appRootPath.toString()}/src/ss`, {

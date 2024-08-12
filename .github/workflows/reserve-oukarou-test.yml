@@ -6,6 +6,8 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment:
+      name: production
     steps:
       - name: Check today is 1st in JST
         run: |
@@ -33,6 +35,7 @@ jobs:
         env:
           EMAIL: ${{ secrets.EMAIL }}
           CAPTCHA_API_KEY: ${{ secrets.CAPTCHA_API_KEY }}
+          MODE: ${{ vars.MODE}}
       - name: Zip ss directory
         run: zip -r ss.zip ss
       - name: Upload ss.zip
