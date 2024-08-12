@@ -112,6 +112,6 @@ async function ss(page: Page, name: string, debug: boolean) {
   }
   count++;
   await page.screenshot({
-    path: `${appRootPath.toString()}/fillForm-${count}-${name}.png`,
+    path: `${appRootPath.toString()}/ss/fillForm-${count}-${name}.png`,
   });
 }
