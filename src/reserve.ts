@@ -44,7 +44,8 @@ export async function reserve(page: Page, restaurant: Restaurant, debug = false)
   );
 
   // solve reCAPTCHA
-  await page.solveRecaptchas();
+  const resolved = await page.solveRecaptchas();
+  console.log('resolved', resolved);
   await setTimeout(3000);
   console.log('page', page.url());
   // reCAPTCHAページ
