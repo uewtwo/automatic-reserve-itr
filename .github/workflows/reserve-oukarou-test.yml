@@ -25,4 +25,11 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Run to reserve oukarou
-        run: bun run src/index.ts oukarou
+        run: bun run src/index.ts oukarou debug
+      - name: Zip ss directory
+        run: zip -r ss.zip ss
+      - name: Upload ss.zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: ss
+          path: ss.zip
