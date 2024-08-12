@@ -30,6 +30,9 @@ jobs:
         run: bun install
       - name: Run to reserve oukarou
         run: bun run src/index.ts oukarou debug
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          CAPTCHA_API_KEY: ${{ secrets.CAPTCHA_API_KEY }}
       - name: Zip ss directory
         run: zip -r ss.zip ss
       - name: Upload ss.zip
