@@ -15,24 +15,26 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
 
     // Some stricter flags (disabled by default)
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noPropertyAccessFromIndexSignature": false,
 
     "noImplicitAny": false,
     "noEmitOnError": true,
+    "declaration": true,
     "removeComments": false,
     "sourceMap": true,
-    "baseUrl": "src",
-    "outDir": "dist",
-    "rootDir": "./",
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "paths": {
       "@automatic-reservation-itr/*": ["*"],
     },
     "skipDefaultLibCheck": true,
   },
-  "include": ["./src/*.ts", "./src/**/*.ts"],
+  "include": ["src/*.ts", "src/**/*.ts", ".env"],
   "exclude": ["node_modules", "dist", "ss/"],
 }

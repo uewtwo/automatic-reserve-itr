@@ -7,7 +7,6 @@ const AvailableStatuses = {
   ALMOST_FULL: '△',
   NG: '☓',
 } as const;
-type AvailableStatus = (typeof AvailableStatuses)[keyof typeof AvailableStatuses];
 
 const StartTimes = {
   '1900': '19:00~',
@@ -22,7 +21,7 @@ export async function fillForm(browser: Browser, page: Page, dt: Date, debug: bo
   const targetMonth = `0${baseDate.getMonth() + 1}月`.slice(-3);
   const targetIndex = await page.evaluate(targetMonth => {
     const options = Array.from(
-      document.querySelectorAll('#apply_join_time > option')
+      document.querySelectorAll('#apply_join_time > option'),
     ) as HTMLElement[];
     return options.findIndex(el => el.innerText.includes(targetMonth));
   }, targetMonth);
@@ -55,7 +54,7 @@ export async function fillForm(browser: Browser, page: Page, dt: Date, debug: bo
     timeTable.map(async el => {
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return await el.evaluate(e => (e.querySelector('td.time-row')! as HTMLElement).innerText);
-    })
+    }),
   );
   const targetRangeIndex = timePerDay.findIndex(t => t.includes(StartTimes['1900']));
 
@@ -66,6 +65,7 @@ export async function fillForm(browser: Browser, page: Page, dt: Date, debug: bo
     const statuses = Array.from(els).map((e, index) => {
       return { status: e.innerText, index };
     });
+
     return statuses
       .filter(s => s.status === availables.OK || s.status === availables.ALMOST_FULL)
       .toReversed();
