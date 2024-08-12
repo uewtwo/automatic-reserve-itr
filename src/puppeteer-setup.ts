@@ -1,6 +1,8 @@
 import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import RecaptchaPlugin from 'puppeteer-extra-plugin-recaptcha';
 
+puppeteer.use(StealthPlugin());
 puppeteer.use(
   RecaptchaPlugin({
     provider: {
@@ -9,5 +11,5 @@ puppeteer.use(
       // token: 'token',
     },
     visualFeedback: true,
-  })
+  }),
 );
