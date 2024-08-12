@@ -1,6 +1,7 @@
+import { getBrowser } from '@automatic-reservation-itr/launchBrowser';
 import { GotoPage } from '@automatic-reservation-itr/utils/GoToPage';
 import appRootPath from 'app-root-path';
-import type { Browser, Page } from 'puppeteer';
+import type { Page } from 'puppeteer';
 
 const AvailableStatuses = {
   OK: '○',
@@ -12,7 +13,7 @@ const StartTimes = {
   '1900': '19:00~',
 };
 
-export async function fillForm(browser: Browser, page: Page, dt: Date, debug: boolean) {
+export async function fillForm(page: Page, dt: Date, debug: boolean) {
   await ss(page, 'page', debug);
 
   // 来店日の仮設定、毎月1日に動かす予定、+3ヶ月後の最初の日付
@@ -28,11 +29,14 @@ export async function fillForm(browser: Browser, page: Page, dt: Date, debug: bo
 
   await page.evaluate(targetIndex => {
     const selectElement = document.querySelector('#apply_join_time') as HTMLSelectElement;
+    console.log('selectElement', selectElement);
+    console.log('typeof selectElement', typeof selectElement);
     selectElement.selectedIndex = targetIndex - 1;
   }, targetIndex);
   await ss(page, 'selected-date', debug);
 
   // 空き照会Window
+  const browser = await getBrowser();
   const [availabilityPage, _] = await Promise.all([
     browser
       .waitForTarget(target => target.opener() === page.target())
@@ -108,6 +112,6 @@ async function ss(page: Page, name: string, debug: boolean) {
   }
   count++;
   await page.screenshot({
-    path: `${appRootPath.toString()}/ss/fillForm-${count}-${name}.png`,
+    path: `${appRootPath.toString()}/fillForm-${count}-${name}.png`,
   });
 }

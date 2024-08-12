@@ -22,10 +22,10 @@ import puppeteer from 'puppeteer-extra';
       'https://as.its-kenpo.or.jp/apply/restaurant_empty_new?s=PT1BTzNnVFBrbG1KbFZuYzAxVFp5Vkhkd0YyWWZWR2JuOTJiblpTWjFKSGQ5a0hkdzFXWg%3D%3D',
       {
         waitUntil: 'domcontentloaded',
-      }
+      },
     );
 
-    await fillForm(browser, page, dt, true);
+    await fillForm(page, dt, true);
   } catch (e) {
     // @ts-ignore
     console.error(e.stack);
