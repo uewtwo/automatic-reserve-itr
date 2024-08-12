@@ -1,0 +1,31 @@
+name: run-reservation
+description: Setup codes and run reservation
+runs:
+  using: composite
+  steps:
+    - name: Setup env
+      shell: bash
+      run: |
+        sudo apt-get install -y fonts-noto-cjk
+        sudo fc-cache -fv
+    - name: Setup bun
+      uses: oven-sh/setup-bun@v1
+    - name: Install dependencies
+      run: bun install
+      shell: bash
+    - name: Run to reserve
+      run: bun run src/index.ts ${{ env.RESTAURANT }}
+      env:
+        EMAIL: ${{ env.EMAIL }}
+        CAPTCHA_API_KEY: ${{ env.CAPTCHA_API_KEY }}
+        MODE: ${{ env.MODE }}
+      shell: bash
+    - name: Zip ss directory
+      run: zip -r ss.zip ss
+      shell: bash
+    - name: Upload ss.zip
+      uses: actions/upload-artifact@v4
+      with:
+        name: ss
+        path: ss.zip
+

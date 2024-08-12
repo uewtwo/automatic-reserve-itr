@@ -1,45 +1,20 @@
-name: reserve-sushi-on-1st
+name: reserve-oukarou-on-1st
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 15 12 * *'
+  # schedule:
+  #   - cron: '0 15 28-31 * *'
 jobs:
   run:
     runs-on: ubuntu-latest
     environment:
       name: production
     steps:
-      - name: Check today is 1st in JST
-        run: |
-          # Check if it's the first day of the month in JST
-          TZ='Asia/Tokyo'
-          if [ $(date '+%d') -eq 1 ]; then
-            echo "It's the first day of the month in JST"
-            echo `date`
-          else
-            echo "It's not the first day of the month in JST"
-            echo `date`
-          fi
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup env
-        run: |
-          sudo apt-get install -y fonts-noto-cjk
-          sudo fc-cache -fv
-      - name: Setup bun
-        uses: oven-sh/setup-bun@v1
-      - name: Install dependencies
-        run: bun install
-      - name: Run to reserve oukarou
-        run: bun run src/index.ts oukarou debug
+      - name: Run reservation
+        uses: ./.github/actions/run-reservation
         env:
+          RESTAURANT: oukarou
           EMAIL: ${{ secrets.EMAIL }}
           CAPTCHA_API_KEY: ${{ secrets.CAPTCHA_API_KEY }}
-          MODE: ${{ vars.MODE}}
-      - name: Zip ss directory
-        run: zip -r ss.zip ss
-      - name: Upload ss.zip
-        uses: actions/upload-artifact@v4
-        with:
-          name: ss
-          path: ss.zip
+          MODE: ${{ vars.MODE }}

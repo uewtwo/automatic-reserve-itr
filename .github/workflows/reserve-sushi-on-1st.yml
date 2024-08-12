@@ -6,24 +6,15 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment:
+      name: production
     steps:
-      - name: Check today is 1st in JST
-        run: |
-          # Check if it's the first day of the month in JST
-          TZ='Asia/Tokyo'
-          if [ $(date '+%d') -eq 1 ]; then
-            echo "It's the first day of the month in JST"
-            echo `date`
-          else
-            echo "It's not the first day of the month in JST"
-            echo `date`
-            exit 0
-          fi
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup bun
-        uses: oven-sh/setup-bun@v1
-      - name: Install dependencies
-        run: bun install
-      - name: Run to reserve sushi
-        run: bun run src/index.ts sushi
+      - name: Run reservation
+        uses: ./.github/actions/run-reservation
+        env:
+          RESTAURANT: sushi
+          EMAIL: ${{ secrets.EMAIL }}
+          CAPTCHA_API_KEY: ${{ secrets.CAPTCHA_API_KEY }}
+          MODE: ${{ vars.MODE }}
